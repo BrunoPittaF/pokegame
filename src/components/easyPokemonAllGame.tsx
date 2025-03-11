@@ -13,7 +13,7 @@ const regions = [
   { name: 'Paldea', start: 905, end: 1025 },
 ];
 
-const PokemonFirstGame: React.FC = () => {
+const EasyPokemonGame: React.FC = () => {
   const [controlRegion, setControlRegion] = useState([
     {
       name: 'Kanto',
@@ -65,7 +65,7 @@ const PokemonFirstGame: React.FC = () => {
   const [startedGame, setStartedGame] = useState<boolean>(false);
   const [pontuation, setPontuation] = useState<number>(0);
   const [record, setRecord] = useState<number>(
-    localStorage.getItem('record') ? Number(localStorage.getItem('record')) : 0
+    localStorage.getItem('recordEasy') ? Number(localStorage.getItem('recordEasy')) : 0
   );
 
   const selectRegionsForGame = () => {
@@ -91,30 +91,9 @@ const PokemonFirstGame: React.FC = () => {
     }
   }, [gameFinished, startedGame, pontuation, record]);
 
-  const handleGuess = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    // if (!isMediumMode && e.key === 'Enter' && input.trim() !== '') {
-    //   try {
-    //     const lengthSelectedRegions = selectedRegions.length === 1 ? 0 : selectedRegions.length - 1;
-    //     const pokemon = pokemonList.find((element) => {
-    //       return (
-    //         element.name.toLocaleLowerCase() === input.toLocaleLowerCase() &&
-    //         element.id <= selectedRegions[lengthSelectedRegions].end &&
-    //         element.id >= selectedRegions[0].start
-    //       );
-    //     });
+  useEffect(() => {}, []);
 
-    //     if (pokemon && !guessed[pokemon.id]) {
-    //       setGuessed((prev) => ({ ...prev, [pokemon.id]: true }));
-    //       // setPokemonData((prev) => ({ ...prev, [pokemon.id]: pokemon }));
-    //       // setPokemonData((prev) => ({ ...prev, [pokemon.id]: { ...pokemon, showName: true } }));
-    //       setPokemonData((prev) => ({ ...prev, [pokemon.id]: pokemon, showName: true }));
-    //       setLastGuessed(pokemon);
-    //       setInput('');
-    //     }
-    //   } catch {
-    //     setInput('');
-    //   }
-    // }
+  const handleGuess = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && input.trim() !== '') {
       try {
         const lengthSelectedRegions = selectedRegions.length === 1 ? 0 : selectedRegions.length - 1;
@@ -317,7 +296,7 @@ const PokemonFirstGame: React.FC = () => {
       {startedGame && (
         <div className="fixed bottom-0 w-full bg-black bg-opacity-80 flex flex-col items-center justify-center">
           <p className="text-center text-lg text-white-700">
-            Acertos: {!surrender ? Object.keys(guessed).length : Object.keys(lastAccept).length} /{' '}
+            Acertos: {!surrender ? Object.keys(guessed).length : Object.keys(lastAccept).length} /
             {selectedRegions[selectedRegions.length - 1].end}
           </p>
           <p className="text-center text-lg text-white-700">Tempo: {timer}s</p>
@@ -364,10 +343,7 @@ const PokemonFirstGame: React.FC = () => {
               O jogo NÃO tem pause. O objetivo é fazer com que veja o quão rápido consegue lembrar do máximo
               de pokemons possíveis, boa sorte &#128516;
             </li>
-            {/* <li className="text-center">
-              Modo Normal: As fotos estão invisiveis ao usuário até acertar. Modo Fácil: As fotos estão
-              visiveis ao usuário
-            </li> */}
+            <li className="text-center">Modo Fácil: As fotos estão visiveis ao usuário</li>
             <li className="text-center">Após digitar o nome do pokemon, basta apertar enter</li>
             <li className="text-center">Boa sorte!</li>
           </ul>
@@ -384,22 +360,18 @@ const PokemonFirstGame: React.FC = () => {
                   className="w-20 h-24 border flex flex-col items-center justify-center bg-gray-200 rounded p-1"
                   data-id={id}
                 >
+                  <img
+                    src={pokemonList[id].imagePokemon}
+                    alt={pokemonList[id]?.name || id.toString()}
+                    className="w-16 h-16"
+                  />
+
                   {guessed[id] ? (
-                    <>
-                      <img
-                        src={pokemonData[id].imagePokemon}
-                        alt={pokemonData[id]?.name || id.toString()}
-                        className="w-16 h-16"
-                      />
-                      <p className="text-xs font-bold text-center text-gray-900 mt-1">
-                        {pokemonData[id]?.name.toLocaleLowerCase()}
-                      </p>
-                    </>
+                    <p className="text-xs font-bold text-center text-gray-900 mt-1">
+                      {pokemonData[id]?.name.toLocaleLowerCase()}
+                    </p>
                   ) : (
-                    <>
-                      <span className="text-2xl">⚪</span>
-                      <p className="text-xs font-bold text-center text-gray-700 mt-1">pokemon</p>
-                    </>
+                    <p className="text-xs font-bold text-center text-gray-700 mt-1"></p>
                   )}
                 </div>
               ))}
@@ -411,4 +383,4 @@ const PokemonFirstGame: React.FC = () => {
   );
 };
 
-export default PokemonFirstGame;
+export default EasyPokemonGame;

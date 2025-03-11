@@ -7,7 +7,7 @@ interface ModeSwitchProps {
 
 const SwitchComponent: React.FC<ModeSwitchProps> = ({ isMedium, onToggle }) => {
   return (
-    <div className="flex items-center space-x-2 m-4">
+    <div className="flex justify-center items-center space-x-2 m-4">
       <span className="text-sm font-medium">{'Modo Fácil'}</span>
       <button
         onClick={onToggle}
