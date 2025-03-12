@@ -4761,7 +4761,7 @@ export const pokemonList = [
   },
   {
     id: 680,
-    "name": "aegislash-shield",
+    "name": "aegislash",
     "url": "https://pokeapi.co/api/v2/pokemon/681/",
     imagePokemon: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/681.png",
     showName: false

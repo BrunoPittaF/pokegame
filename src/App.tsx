@@ -4,6 +4,7 @@ import { useState } from 'react';
 import EasyPokemonGame from './components/easyPokemonAllGame';
 import PokemonFirstGame from './components/pokemonAllGame';
 import SwitchComponent from './components/switchComponent';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [isEasyMode, setIsEasyMode] = useState<boolean>(true);
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <section className="bg-[#1a1a1a] flex flex-col w-full">
+      <Analytics />
       <h1 className="text-center text-white text-3xl font-bold py-4">Pokemon Game</h1>
 
       {!startGame ? (
